@@ -28,3 +28,4 @@ C:\VG\Project\dotnetcore\WebProject\obj\Debug\net8.0\refint\WebProject.dll
 C:\VG\Project\dotnetcore\WebProject\obj\Debug\net8.0\WebProject.pdb
 C:\VG\Project\dotnetcore\WebProject\obj\Debug\net8.0\WebProject.genruntimeconfig.cache
 C:\VG\Project\dotnetcore\WebProject\obj\Debug\net8.0\ref\WebProject.dll
+C:\VG\Project\dotnetcore\WebProject\obj\Debug\net8.0\WebProject.sourcelink.json
