@@ -39,7 +39,7 @@ jobs:
 
     - name: Zip Publish Folder
       if: ${{ success() }}
-      run: Compress-Archive -Path "C:\VG\Project\runner\actions-runner\_work\WebProject\WebProject\publish/*" -DestinationPath "C:/inetpub/gitaction/artifact/published.zip" -Force
+      run: Compress-Archive -Path "C:\VG\Project\runner\actions-runner\_work\WebProject\WebProject\publish/*" -DestinationPath "C:\VG\Project\artifact" -Force
 
     - name: Stop Specific IIS Website
       run: |
@@ -50,7 +50,7 @@ jobs:
         Start-Sleep -Seconds 20
 
     - name: Unzip Artifact
-      run: Expand-Archive -Path "C:/inetpub/gitaction/artifact/published.zip" -DestinationPath "C:/inetpub/wwwroot-web-project" -Force
+      run: Expand-Archive -Path "C:\VG\Project\artifact" -DestinationPath "C:\VG\Project\publish" -Force
     
     - name: Stop Specific IIS Website
       run: |
