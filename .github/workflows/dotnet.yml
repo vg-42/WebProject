@@ -50,7 +50,7 @@ jobs:
         Start-Sleep -Seconds 20
 
     - name: Unzip Artifact
-      run: Expand-Archive -Path "C:/inetpub/gitaction/artifact/published.zip" -DestinationPath "C:/inetpub/wwwroot-webistename" -Force
+      run: Expand-Archive -Path "C:/inetpub/gitaction/artifact/published.zip" -DestinationPath "C:/inetpub/wwwroot-web-project" -Force
     
     - name: stop specific iis website
       run: |
