@@ -43,10 +43,10 @@ jobs:
 
     - name: Stop Specific IIS Website
       run: |
-        $appPoolName = 'web-project'
+        $appPoolName = 'webproject'
         Import-Module WebAdministration
         Stop-WebAppPool -Name $appPoolName
-        PowerShell -Command "Stop-Website -Name 'web-project'"
+        PowerShell -Command "Stop-Website -Name 'webproject'"
         Start-Sleep -Seconds 20
 
     - name: Unzip Artifact
@@ -55,10 +55,10 @@ jobs:
     - name: Stop Specific IIS Website
       run: |
         Start-Sleep -Seconds 20
-        $appPoolName = 'web-project'
+        $appPoolName = 'webproject'
         Import-Module WebAdministration
         Start-WebAppPool -Name $appPoolName
-        PowerShell -Command "Start-Website -Name 'web-project'"
+        PowerShell -Command "Start-Website -Name 'webproject'"
         
     
 
