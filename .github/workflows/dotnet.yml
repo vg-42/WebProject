@@ -11,28 +11,55 @@ on:
 
 jobs:
   build:
-
     runs-on: self-hosted
-
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET
+    - name: checkout repo
+      uses: actions/checkout@v2
+
+    - name: Setup .NET core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 8.0.x
         
-    - name: clean
+    - name: clean dependencies
       run: dotnet clean
-      working-directory: C:\VG\Project\runner\actions-runner\_work
+      working-directory: C:\VG\Project\runner\actions-runner\_work\adhi...\adhi..
       
     - name: Restore dependencies
       run: dotnet restore
       working-directory: C:\VG\Project\runner\actions-runner\_work
       
-    - name: Build
+    - name: Build solution
       run: dotnet build --configuration Release
       working-directory: C:\VG\Project\runner\actions-runner\_work
       
     - name: publish
       run: dotnet publish --configuration Release --output publish
       working-directory: C:\VG\Project\runner\actions-runner\_work
+
+    - name: zip publish folder
+      if: ${{ success() }}
+      run: Compress-Archive -Path "F:\runner\actions-runner\_work\adhi...\adhi../publish/*" -DestinationPath "C:/inetpub/gitaction/artifact/published.zip" -Force
+
+    - name: stop specific iis website
+      run: |
+        $appPoolName = 'name here'
+        Import-Module WebAdministration
+        Stop-WebAppPool -Name $appPoolName
+        PowerShell -Command "Stop-Website -Name 'name here'"
+        Start-Sleep -Seconds 20
+
+    - name: Unzip Artifact
+      run: Expand-Archive -Path "C:/inetpub/gitaction/artifact/published.zip" -DestinationPath "C:/inetpub/wwwroot-webistename" -Force
+    
+    - name: stop specific iis website
+      run: |
+        Start-Sleep -Seconds 20
+        $appPoolName = 'name here'
+        Import-Module WebAdministration
+        Start-WebAppPool -Name $appPoolName
+        PowerShell -Command "Start-Website -Name 'name here'"
+        
+    
+
+
