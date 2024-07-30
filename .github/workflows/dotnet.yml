@@ -11,37 +11,37 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: Self-Hosted
     steps:
     - name: checkout repo
       uses: actions/checkout@v2
 
-    - name: Setup .NET core
+    - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 8.0.x
         
-    - name: clean dependencies
+    - name: clean Dependencies
       run: dotnet clean
       working-directory: C:\VG\Project\runner\actions-runner\_work\WebProject\WebProject
       
-    - name: Restore dependencies
+    - name: Restore Dependencies
       run: dotnet restore
       working-directory: C:\VG\Project\runner\actions-runner\_work\WebProject\WebProject
       
-    - name: Build solution
+    - name: Build Solution
       run: dotnet build --configuration Release
       working-directory: C:\VG\Project\runner\actions-runner\_work\WebProject\WebProject
       
-    - name: publish
+    - name: Publish
       run: dotnet publish --configuration Release --output publish
       working-directory: C:\VG\Project\runner\actions-runner\_work\WebProject\WebProject
 
-    - name: zip publish folder
+    - name: Zip Publish Folder
       if: ${{ success() }}
       run: Compress-Archive -Path "C:\VG\Project\runner\actions-runner\_work\WebProject\WebProject\publish/*" -DestinationPath "C:/inetpub/gitaction/artifact/published.zip" -Force
 
-    - name: stop specific iis website
+    - name: Stop Specific IIS Website
       run: |
         $appPoolName = 'web-project'
         Import-Module WebAdministration
@@ -52,7 +52,7 @@ jobs:
     - name: Unzip Artifact
       run: Expand-Archive -Path "C:/inetpub/gitaction/artifact/published.zip" -DestinationPath "C:/inetpub/wwwroot-web-project" -Force
     
-    - name: stop specific iis website
+    - name: Stop Specific IIS Website
       run: |
         Start-Sleep -Seconds 20
         $appPoolName = 'web-project'
